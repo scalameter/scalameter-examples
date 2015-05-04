@@ -1,0 +1,16 @@
+.DS_Store
+
+target
+project/target
+tmp*
+
+
+*.*~
+.history
+
+.classpath
+.project
+.settings
+.gitattributes
+
+.metadata/
