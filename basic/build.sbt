@@ -1,5 +1,3 @@
-val scalaMeterVersion = "0.7-SNAPSHOT"
-
 /**  This is the simplest possible use of ScalaMeter.
   *  It allows running ScalaMeter benchmarks as part of the test suite.
   *  It means, that when the test command is run, ScalaMeter benchmarks are run along
@@ -11,12 +9,11 @@ lazy val basic = Project(
   settings = Defaults.coreDefaultSettings ++ Seq(
     name := "scalameter-examples",
     organization := "com.storm-enroute",
-    version := scalaMeterVersion,
     scalaVersion := "2.11.1",
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature", "-Xlint"),
     publishArtifact := false,
     libraryDependencies ++= Seq(
-      "com.storm-enroute" %% "scalameter" % scalaMeterVersion % "test"
+      "com.storm-enroute" %% "scalameter" % version.value % "test" // ScalaMeter version is set in version.sbt
     ),
     resolvers ++= Seq(
       "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
