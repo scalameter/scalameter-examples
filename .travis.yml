@@ -9,6 +9,8 @@ env:
     TASKS="test:compile"
   - TEST_DIR=basic-with-separate-config
     TASKS="bench:compile"
+  - TEST_DIR=offline-regression-report
+    TASKS="bench:compile"
 script: cd $TEST_DIR && sbt $TRAVIS_SCALA_VERSION_ARG $TASKS
 branches:
   only:
