@@ -23,7 +23,7 @@ lazy val basic = Project(
     parallelExecution in Benchmark := false,
     logBuffered := false
   )
-) configs (
+) configs(
   Benchmark
 ) settings(
   inConfig(Benchmark)(Defaults.testSettings): _*
