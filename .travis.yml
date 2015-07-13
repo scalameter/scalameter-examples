@@ -6,13 +6,13 @@ jdk:
   - oraclejdk7
 env:
   - TEST_DIR=basic
-    TASKS="test:compile"
+    TASKS="test:test"
   - TEST_DIR=basic-with-separate-config
-    TASKS="bench:compile"
+    TASKS="bench:test"
   - TEST_DIR=offline-regression-report
-    TASKS="bench:compile"
+    TASKS="bench:test"
   - TEST_DIR=invocation-count-measurers
-    TASKS="bench:compile"
+    TASKS="bench:test"
 script: cd $TEST_DIR && sbt $TRAVIS_SCALA_VERSION_ARG $TASKS
 branches:
   only:
