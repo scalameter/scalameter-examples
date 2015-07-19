@@ -26,7 +26,7 @@ class DescendantsAllocationsBenchmark extends PerformanceTest.Microbenchmark {
   override lazy val measurer: Measurer =
     Measurer.MethodInvocationCount(InvocationCountMatcher(
       ClassMatcher.Descendants(classOf[Either[_, _]], direct = true, withSelf = false),
-      MethodMatcher.MethodName("<init>")
+      MethodMatcher.Allocation
     ))
 
   // we want one JVM instance since this measurer is deterministic
