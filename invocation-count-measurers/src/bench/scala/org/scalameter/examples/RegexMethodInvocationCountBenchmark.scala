@@ -15,7 +15,7 @@ class RegexMethodInvocationCountBenchmark extends PerformanceTest.Microbenchmark
     size <- sizes
   } yield 0 until size
 
-  val combined = Gen.tupled(ranges, methods)
+  val combined = Gen.crossProduct(ranges, methods)
 
   performance of "Range" in {
     measure method "foreach" in {

@@ -13,6 +13,8 @@ env:
     TASKS="bench:test"
   - TEST_DIR=invocation-count-measurers
     TASKS="bench:test"
+  - TEST_DIR=jbench 
+    TASKS="bench:test"
 script: cd $TEST_DIR && sbt $TRAVIS_SCALA_VERSION_ARG $TASKS
 branches:
   only:
