@@ -2,11 +2,11 @@ package org.scalameter.examples
 
 import org.scalameter.api._
 import org.scalameter.execution.invocation.InvocationCountMatcher
-import org.scalameter.execution.invocation.InvocationCountMatcher.{MethodMatcher, ClassMatcher}
+import org.scalameter.picklers.noPickler._
 import scala.util.Random
 
 
-class SimpleAllocationsBenchmark extends PerformanceTest.Microbenchmark {
+class SimpleAllocationsBenchmark extends Bench.Forked[Long] {
   val sizes = Gen.range("size")(300000, 1500000, 300000)
 
   val lists = for {
@@ -22,9 +22,13 @@ class SimpleAllocationsBenchmark extends PerformanceTest.Microbenchmark {
     }
   }
 
-  // we want to count allocations of `Option` method invocations
-  override lazy val measurer: Measurer =
-    Measurer.MethodInvocationCount(InvocationCountMatcher.allocations(classOf[Right[_, _]]))
+  // we want to count allocations of `Right`, so we just expect one map entry
+  // and we reduce result map to `Long` to simplify benchmark
+  def measurer: Measurer[Long] = Measurer.MethodInvocationCount(
+    InvocationCountMatcher.allocations(classOf[Right[_, _]])
+  ).map(v => v.copy(value = v.value.valuesIterator.sum))
+
+  def aggregator: Aggregator[Long] = Aggregator.median
 
   // we want one JVM instance since this measurer is deterministic
   override def defaultConfig: Context = Context(exec.independentSamples -> 1)
