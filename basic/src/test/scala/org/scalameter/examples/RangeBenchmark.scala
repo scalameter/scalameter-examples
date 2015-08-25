@@ -2,7 +2,7 @@ package org.scalameter.examples
 
 import org.scalameter.api._
 
-object RangeBenchmark extends PerformanceTest.Quickbenchmark {
+object RangeBenchmark extends Bench.LocalTime {
   val sizes = Gen.range("size")(300000, 1500000, 300000)
 
   val ranges = for {

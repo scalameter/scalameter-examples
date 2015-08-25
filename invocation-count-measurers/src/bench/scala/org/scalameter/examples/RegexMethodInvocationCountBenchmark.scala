@@ -1,11 +1,12 @@
 package org.scalameter.examples
 
 import org.scalameter.api._
+import org.scalameter.api.Aggregator.Implicits._
 import org.scalameter.execution.invocation.InvocationCountMatcher
 import org.scalameter.picklers.noPickler._
 
 
-class RegexMethodInvocationCountBenchmark extends PerformanceTest.Microbenchmark {
+class RegexMethodInvocationCountBenchmark extends Bench.Forked[Map[String, Long]] {
   val sizes = Gen.range("size")(1000, 10000, 1000)
   val methods = Gen.enumeration("method")(
     (bi: BigInt) => bi.toString(), (bi: BigInt) => bi.toString(10), (bi: BigInt) => bi.toByteArray
@@ -27,8 +28,11 @@ class RegexMethodInvocationCountBenchmark extends PerformanceTest.Microbenchmark
   }
 
   // we want to count all methods that begins with "to"
-  override lazy val measurer: Measurer =
-    Measurer.MethodInvocationCount(InvocationCountMatcher.forRegex("scala.math.BigInt".r, "^to\\w+".r))
+  def measurer: Measurer[Map[String, Long]] = Measurer.MethodInvocationCount(
+    InvocationCountMatcher.forRegex("scala.math.BigInt".r, "^to\\w+".r)
+  )
+
+  def aggregator: Aggregator[Map[String, Long]] = Aggregator.median
 
   // we want one JVM instance since this measurer is deterministic
   override def defaultConfig: Context = Context(exec.independentSamples -> 1)

@@ -5,7 +5,7 @@ import org.scalameter.execution.invocation.InvocationCountMatcher
 import org.scalameter.picklers.noPickler._
 
 
-class SimpleMethodInvocationCountBenchmark extends PerformanceTest.Microbenchmark {
+class SimpleMethodInvocationCountBenchmark extends Bench.Forked[Long] {
   val sizes = Gen.range("size")(1000, 10000, 1000)
   val methods = Gen.enumeration("method")(
     (bi: BigInt) => bi.toString(), (bi: BigInt) => bi.toString(10), (bi: BigInt) => bi.toByteArray
@@ -26,9 +26,13 @@ class SimpleMethodInvocationCountBenchmark extends PerformanceTest.Microbenchmar
     }
   }
 
-  // we want to count all methods that are toString methods
-  override lazy val measurer: Measurer =
-    Measurer.MethodInvocationCount(InvocationCountMatcher.forName("scala.math.BigInt", "toString"))
+  // we want to count invocations of `BigInt.toString`, so we just expect one map entry
+  // and we reduce result map to `Long` to simplify benchmark
+  def measurer: Measurer[Long] = Measurer.MethodInvocationCount(
+    InvocationCountMatcher.forName("scala.math.BigInt", "toString")
+  ).map(v => v.copy(value = v.value.valuesIterator.sum))
+
+  def aggregator: Aggregator[Long] = Aggregator.median
 
   // we want one JVM instance since this measurer is deterministic
   override def defaultConfig: Context = Context(exec.independentSamples -> 1)

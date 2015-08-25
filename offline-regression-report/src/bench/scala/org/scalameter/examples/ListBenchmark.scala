@@ -4,7 +4,7 @@ import org.scalameter.api._
 import org.scalameter.Measurer._
 
 
-object ListBenchmark extends PerformanceTest.OfflineRegressionReport {
+object ListBenchmark extends Bench.OfflineRegressionReport {
   val tupledLists = for {
     a <- Gen.range("a")(0, 100, 10)
     b <- Gen.range("b")(100, 200, 10)
@@ -21,7 +21,7 @@ object ListBenchmark extends PerformanceTest.OfflineRegressionReport {
     }
   }
 
-  override def measurer: Measurer = new MemoryFootprint
+  override def measurer: Measurer[Double] = new MemoryFootprint
 
   // GZIPJSONSerializationPersistor is default but we want to choose custom path for regression data
   override def persistor: Persistor = new GZIPJSONSerializationPersistor("target/results")
