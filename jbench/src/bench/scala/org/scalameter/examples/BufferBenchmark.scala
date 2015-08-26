@@ -66,7 +66,7 @@ class BufferBenchmark extends JBench.OnlineRegressionReport {
   @gen("arrayBuffers")
   @benchmark("buffers.ops.add")
   @curve("array")
-  def arrayBufferAdd(v: (Int, mutable.ArrayBuffer[Int])): mutable.ArrayBuffer[Int] = {
+  def arrayBufferAdd(v: (Int, mutable.ArrayBuffer[Int])) = {
     val (size, buffer) = v
 
     val random = new Random(size)
@@ -82,7 +82,7 @@ class BufferBenchmark extends JBench.OnlineRegressionReport {
   @gen("listBuffers")
   @benchmark("buffers.ops.add")
   @curve("list")
-  def listBufferAdd(v: (Int, mutable.ListBuffer[Int])): mutable.ListBuffer[Int] = {
+  def listBufferAdd(v: (Int, mutable.ListBuffer[Int])) = {
     val (size, buffer) = v
 
     val random = new Random(size)
@@ -99,7 +99,7 @@ class BufferBenchmark extends JBench.OnlineRegressionReport {
   @setup("arrayBufferSetup")
   @benchmark("buffers.ops.remove")
   @curve("array")
-  def arrayBufferRemove(v: (Int, mutable.ArrayBuffer[Int])): mutable.ArrayBuffer[Int] = {
+  def arrayBufferRemove(v: (Int, mutable.ArrayBuffer[Int])) = {
     val (size, buffer) = v
 
     var random = new Random(size)
@@ -118,7 +118,7 @@ class BufferBenchmark extends JBench.OnlineRegressionReport {
   @setup("listBufferSetup")
   @benchmark("buffers.ops.remove")
   @curve("list")
-  def listBufferRemove(v: (Int, mutable.ListBuffer[Int])): mutable.ListBuffer[Int] = {
+  def listBufferRemove(v: (Int, mutable.ListBuffer[Int])) = {
     val (size, buffer) = v
 
     var random = new Random(size)
