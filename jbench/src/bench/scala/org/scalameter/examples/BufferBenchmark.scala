@@ -29,7 +29,7 @@ class BufferBenchmark extends JBench.OfflineReport {
   // we don't need `ContextBuilder` here, we can take advantage of Scala API
   override def defaultConfig: Context = Context(
     exec.benchRuns -> 25,
-    exec.independentSamples -> 5
+    exec.independentSamples -> 2
   )
 
   def arrayBufferSetup(v: (Int, mutable.ArrayBuffer[Int])): Unit = {
