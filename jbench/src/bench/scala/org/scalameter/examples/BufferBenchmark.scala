@@ -1,13 +1,16 @@
 package org.scalameter.examples
 
+
+
 import org.scalameter.{Context, Gen}
-import org.scalameter.japi.JBench
 import org.scalameter.api._
+import org.scalameter.japi.JBench
 import scala.collection.mutable
 import scala.util.Random
 
 
-class BufferBenchmark extends JBench.OnlineReport {
+
+class BufferBenchmark extends JBench.OfflineReport {
   // we don't need `JGen` here, we can take advantage of the Scala API
   val sizes = Gen.exponential("size")(100, 10000, 10)
 
