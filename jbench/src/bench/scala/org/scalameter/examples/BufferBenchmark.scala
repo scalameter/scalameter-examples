@@ -7,7 +7,7 @@ import scala.collection.mutable
 import scala.util.Random
 
 
-class BufferBenchmark extends JBench.OnlineRegressionReport {
+class BufferBenchmark extends JBench.OnlineReport {
   // we don't need `JGen` here, we can take advantage of the Scala API
   val sizes = Gen.exponential("size")(100, 10000, 10)
 
