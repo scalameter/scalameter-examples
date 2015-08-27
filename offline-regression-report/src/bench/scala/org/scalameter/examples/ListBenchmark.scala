@@ -6,8 +6,8 @@ import org.scalameter.Measurer._
 
 object ListBenchmark extends Bench.OfflineRegressionReport {
   val tupledLists = for {
-    a <- Gen.range("a")(0, 100, 10)
-    b <- Gen.range("b")(100, 200, 10)
+    a <- Gen.range("a")(0, 100, 20)
+    b <- Gen.range("b")(100, 200, 20)
   } yield ((0 until a).toList, (100 until b).toList)
 
   performance of "List" in {
