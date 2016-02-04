@@ -1,7 +1,10 @@
 package org.scalameter.examples
 
+
+
 import org.scalameter.api._
 import org.scalameter.picklers.noPickler._
+
 
 
 class BoxingCountBenchmark extends Bench.Forked[Long] {

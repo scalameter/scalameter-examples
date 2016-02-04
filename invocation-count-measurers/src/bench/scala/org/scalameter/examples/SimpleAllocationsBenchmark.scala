@@ -1,9 +1,12 @@
 package org.scalameter.examples
 
+
+
 import org.scalameter.api._
 import org.scalameter.execution.invocation.InvocationCountMatcher
 import org.scalameter.picklers.noPickler._
 import scala.util.Random
+
 
 
 class SimpleAllocationsBenchmark extends Bench.Forked[Long] {
