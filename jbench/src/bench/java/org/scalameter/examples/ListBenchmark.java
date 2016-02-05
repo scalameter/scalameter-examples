@@ -10,7 +10,7 @@ import org.scalameter.japi.annotation.*;
 import scala.Tuple2;
 
 
-public class ListBenchmark extends JBench.OnlineRegressionReport {
+public class ListBenchmark extends JBench.OfflineReport {
   public final JGen<Integer> sizes = JGen.exponential("size", 100, 10000, 10);
 
   // on java 8 `map` combinator can be expressed using lambdas
