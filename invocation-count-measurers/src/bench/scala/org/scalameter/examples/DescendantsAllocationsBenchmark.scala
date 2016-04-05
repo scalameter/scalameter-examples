@@ -5,7 +5,8 @@ package org.scalameter.examples
 import org.scalameter.api._
 import org.scalameter.api.Aggregator.Implicits._
 import org.scalameter.execution.invocation.InvocationCountMatcher
-import org.scalameter.execution.invocation.InvocationCountMatcher.{MethodMatcher, ClassMatcher}
+import org.scalameter.execution.invocation.InvocationCountMatcher.MethodMatcher
+import org.scalameter.execution.invocation.InvocationCountMatcher.ClassMatcher
 import org.scalameter.picklers.noPickler._
 import scala.util.Random
 
